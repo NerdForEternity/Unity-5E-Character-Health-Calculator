@@ -270,13 +270,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SolutionOne
   Name: Dylan
-  Level: 1
-  Class: 
-  Race: 
-  Constitution: 0
-  isTough: 0
-  isStout: 0
-  isRolled: 0
+  Level: 12
+  Class: Wizard
+  Race: Human
+  Constitution: 13
+  isTough: 1
+  isStout: 1
+  isRolled: 1
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0

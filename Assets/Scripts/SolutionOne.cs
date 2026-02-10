@@ -24,6 +24,8 @@ public class SolutionOne : MonoBehaviour {
     private int hitDieCount;
     private string ToughStoutString;
     private string RolledOrAveragedString;
+
+    private int healthPoints;
     
     private void Start() {
         
@@ -36,7 +38,7 @@ public class SolutionOne : MonoBehaviour {
 
         //Initial message declaring Character
         Debug.Log("My character " + Name + " is a level " + Level + " " + Class + 
-        " with a CON score of " + Constitution + " and is of the " + Race + " and has " + ToughStoutString
+        " with a CON score of " + Constitution + " and is of the " + Race + " race. They have " + ToughStoutString
         + " I want the HP " + RolledOrAveragedString);
         Debug.Log(constitutionModifier);
 
@@ -79,7 +81,7 @@ public class SolutionOne : MonoBehaviour {
                 ToughStoutString = "the Stout feat.";
                 break;
             case "false-false":
-                ToughStoutString = "neither the Tough feat or the Stout feat.";
+                ToughStoutString = "neither the Tough feat nor the Stout feat.";
                 break;
         }
 
