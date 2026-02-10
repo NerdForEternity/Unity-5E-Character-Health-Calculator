@@ -2,9 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class SolutionOne : MonoBehaviour {
-    
-    [SerializeField] private string Name;
+public class SolutionOne : MonoBehaviour
+{
+
+    [SerializeField] private new string name;
     [SerializeField] private int Level;
     [SerializeField] private string Class;
     [SerializeField] private string Race;
@@ -13,58 +14,64 @@ public class SolutionOne : MonoBehaviour {
     [SerializeField] private bool isStout;
     [SerializeField] private bool isRolled;
 
-    string[] characterClass = {"Artificer", "Barbarian", "Bard", "Cleric", 
-    "Druid", "Fighter", "Monk", "Ranger", "Rogue", "Paladin", "Sorcerer", 
-    "Wizard", "Warlock"};
-    
-
-    private Dictionary<string, int> classHitDice = new Dictionary<string, int>();
-
     private double constitutionModifier;
     private int hitDieCount;
     private string ToughStoutString;
     private string RolledOrAveragedString;
+    private double healthPoints;
 
-    private int healthPoints;
-    
-    private void Start() {
-        
-        FillClassHitDiceDictionary();
+    string[] characterClass = {"Artificer", "Barbarian", "Bard", "Cleric",
+    "Druid", "Fighter", "Monk", "Ranger", "Rogue", "Paladin", "Sorcerer",
+    "Wizard", "Warlock"};
+
+    string[] characterRace = {"Aasimar", "Dragonborn", "Dwarf", "Elf",
+        "Gnome", "Goliath", "Halfling", "Human", "Orc", "Tiefling"};
+
+    private Dictionary<string, int> classHitDice = new Dictionary<string, int>()
+    {
+        {"Artificer", 8},
+        {"Barbarian", 12},
+        {"Bard", 8},
+        {"Cleric", 8},
+        {"Druid", 8},
+        {"Fighter", 10},
+        {"Monk", 8},
+        {"Ranger", 10},
+        {"Rogue", 8},
+        {"Paladin", 10},
+        {"Sorcerer", 6},
+        {"Wizard", 6},
+        {"Warlock", 8},
+
+    };
+
+    private void Start()
+    {
+
+        // Set Maximum Level of 20
+        if (Level > 20) Level = 20;
+
+        //Calculations for initial message
         CalculateConstitutionModifier();
         UpdateBoolStrings();
 
-        // Set Maximum Level of 20
-        if(Level > 20) Level = 20;
-
         //Initial message declaring Character
-        Debug.Log("My character " + Name + " is a level " + Level + " " + Class + 
+        Debug.Log("My character " + name + " is a level " + Level + " " + Class +
         " with a CON score of " + Constitution + " and is of the " + Race + " race. They have " + ToughStoutString
         + " I want the HP " + RolledOrAveragedString);
-        Debug.Log(constitutionModifier);
 
-    }
+        //HP Calculations
+        RollHitDice();
+        DetermineRaceBonus();
 
-    private void FillClassHitDiceDictionary()
-    {
-        //Fill classHitDice Dictionary
-        classHitDice.Add("Artificer", 8);
-        classHitDice.Add("Barbarian", 12);
-        classHitDice.Add("Bard", 8);
-        classHitDice.Add("Cleric", 8);
-        classHitDice.Add("Druid", 8);
-        classHitDice.Add("Fighter", 10);
-        classHitDice.Add("Monk", 8);
-        classHitDice.Add("Ranger", 10);
-        classHitDice.Add("Rogue", 8);
-        classHitDice.Add("Paladin", 10);
-        classHitDice.Add("Sorcerer", 6);
-        classHitDice.Add("Wizard", 6);
-        classHitDice.Add("Warlock", 8);
+        Debug.Log("The character " + name + " has a total of " + Math.Floor(healthPoints) + " HP.");
+
+
     }
 
     private void CalculateConstitutionModifier()
     {
-        constitutionModifier = Math.Floor((double)(Constitution - 10)/2);
+        constitutionModifier = Math.Floor((double)(Constitution - 10) / 2);
     }
 
     private void UpdateBoolStrings()
@@ -94,5 +101,41 @@ public class SolutionOne : MonoBehaviour {
                 RolledOrAveragedString = "averaged.";
                 break;
         }
+    }
+
+    private void RollHitDice()
+    {
+        switch (isRolled)
+        {
+            case true:
+                for (int i = 0; i < Level-1; i++)
+                {
+                    healthPoints += UnityEngine.Random.Range(1, classHitDice[Class]);
+                }
+                break;
+            case false:
+                healthPoints += Level * DieAverage();
+                break;
+        }
+
+    }
+
+    private void DetermineRaceBonus()
+    {
+        if (Class == "Dwarf")
+        {
+            healthPoints += Level * 2;
+        }
+        else if (Class == "Orc" ||  Class == "Goliath")
+        {
+            healthPoints += Level;
+        }
+    }
+
+    private double DieAverage()
+    {
+        double average;
+        average = (classHitDice[Class] + 1) / 2;
+        return average;
     }
 }
