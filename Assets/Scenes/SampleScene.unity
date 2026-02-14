@@ -269,14 +269,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb2baecb3ea11906bac4c1bba919445f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SolutionOne
-  Name: Dylan
+  name: Gerome
   Level: 12
   Class: Wizard
   Race: Human
   Constitution: 13
-  isTough: 1
-  isStout: 1
-  isRolled: 1
+  isTough: 0
+  isStout: 0
+  isRolled: 0
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0

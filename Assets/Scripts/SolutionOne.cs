@@ -55,17 +55,18 @@ public class SolutionOne : MonoBehaviour
         CalculateConstitutionModifier();
         UpdateBoolStrings();
 
-        //Initial message declaring Character
+        //Initial message declaring Character Stats
         Debug.Log("My character " + name + " is a level " + Level + " " + Class +
-        " with a CON score of " + Constitution + " and is of the " + Race + " race. They have " + ToughStoutString
-        + " I want the HP " + RolledOrAveragedString);
+        " with a CON score of " + Constitution + " and is of the " + Race + 
+        " race. They have " + ToughStoutString + " I want the HP " 
+        + RolledOrAveragedString);
 
         //HP Calculations
         RollHitDice();
         DetermineRaceBonus();
 
         Debug.Log("The character " + name + " has a total of " + Math.Floor(healthPoints) + " HP.");
-
+        Debug.Log("Constitution Modifier: " + constitutionModifier);
 
     }
 
