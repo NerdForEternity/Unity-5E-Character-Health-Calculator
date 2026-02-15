@@ -64,6 +64,7 @@ public class SolutionOne : MonoBehaviour
         //HP Calculations
         RollHitDice();
         DetermineRaceBonus();
+        DetermineToughStoutBonus();
 
         Debug.Log("The character " + name + " has a total of " + Math.Floor(healthPoints) + " HP.");
         Debug.Log("Constitution Modifier: " + constitutionModifier);
@@ -128,6 +129,18 @@ public class SolutionOne : MonoBehaviour
             healthPoints += Level * 2;
         }
         else if (Class == "Orc" ||  Class == "Goliath")
+        {
+            healthPoints += Level;
+        }
+    }
+
+    private void DetermineToughStoutBonus()
+    {
+        if (isTough)
+        {
+            healthPoints += Level * 2;
+        }
+        else if (isStout)
         {
             healthPoints += Level;
         }
